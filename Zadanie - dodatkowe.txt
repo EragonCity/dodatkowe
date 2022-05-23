@@ -1,0 +1,22 @@
+Zadanie do zrobienia na poprawę:
+
+Strona do logowania: 
+	HTMP + CSS
+Formularz logowania: 
+	Login, Hasło, Email, Nick
+Walidacja poprawności wprowadzonych danych: 
+	Login zaczyna się od litery i zawiera litery, cyfry i znak "_"
+	Hasło dłuższe niż 6 znaków i zawiera przynajmniej jedną małą literę, jedną dużą literę i jedną cyfrę
+	Emali z godny ze standardem
+	Nick zaczyna się od litery
+	Informacje o błędnych danych wypisywane na formularzu (innerHTML)
+Połączenie do bazy mysql:
+	odczyt z bazy zgodności loginu i hasła z wprowadzonym przez użytkownika
+	zapis danych nowego użytkownika do bazy
+	Połączenia do bazy - zdefiniować
+	Utworzyć tabelę użytkowników
+	Nie pozwolić na dodanie nowego użytkownika o loginie lub nick-u istniejącym już w bazie
+Hasła w bazie szygrowane MD5
+Aplikacja daje możliwośc zalogowania się, a jeśli nie ma w bazie jeszcze takiego użytkownika to można go dodać do bazy
+
+Do oddania do 31 maja 2022

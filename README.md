@@ -19,4 +19,4 @@ Zadanie do zrobienia na poprawę:
 - [ ]    **Hasła w bazie szygrowane MD5**
 - [ ]    **Aplikacja daje możliwośc zalogowania się, a jeśli nie ma w bazie jeszcze takiego użytkownika to można go dodać do bazy**
 
-Do oddania do 31 maja 2022
+==Do oddania do 31 maja 2022==

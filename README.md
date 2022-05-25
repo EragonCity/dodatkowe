@@ -11,10 +11,10 @@ Zadanie do zrobienia na poprawę:
 - [x]    	- Nick zaczyna się od litery
 - [x]    	- Informacje o błędnych danych wypisywane na formularzu (innerHTML)
 - [x]    **Połączenie do bazy mysql:**
-- [ ]    	- odczyt z bazy zgodności loginu i hasła z wprowadzonym przez użytkownika
+- [?]    	- odczyt z bazy zgodności loginu i hasła z wprowadzonym przez użytkownika
 - [ ]    	- zapis danych nowego użytkownika do bazy
 - [x]    	- Połączenia do bazy - zdefiniować
-- [ ]    	- Utworzyć tabelę użytkowników
+- [x]    	- Utworzyć tabelę użytkowników
 - [ ]    	- Nie pozwolić na dodanie nowego użytkownika o loginie lub nick-u istniejącym już w bazie
 - [ ]    **Hasła w bazie szygrowane MD5**
 - [ ]    **Aplikacja daje możliwośc zalogowania się, a jeśli nie ma w bazie jeszcze takiego użytkownika to można go dodać do bazy**

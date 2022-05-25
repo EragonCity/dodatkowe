@@ -17,29 +17,15 @@
       $data = htmlspecialchars($data);
       return $data;
     }
-    //database connection
-    $link = new mysqli("localhost", "root", "");
-    if (!$link) {
-      die("Not connected : " . mysql_error());
-    }
-
-    // make login the current db
-    // check whenever the database exists
-    $database_select = "USE login";
-    $database_create = "CREATE DATABASE login";
-    if ($link->query($database_select) === true) {
-      echo "Connected to database";
-    } else {
-      //error
-      echo "Error connecting to database:" . $link->error;
-      //create database if does not exist
-      if ($link->query($database_create) === true) {
-        echo "Database created successfully";
-      } else {
-        echo "Error created database: " . $link->error;
+    //console logging
+    function console_log($output, $with_script_tags = true)
+    {
+      $js_code = "console.log(" . json_encode($output, JSON_HEX_TAG) . ");";
+      if ($with_script_tags) {
+        $js_code = "<script>" . $js_code . "</script>";
       }
+      echo $js_code;
     }
-    $link->close();
     //form validation
     $loginErr = $passwordErr = $emailErr = $nickErr = "";
     $login = $password = $email = $nick = "";
@@ -70,7 +56,7 @@
         }
       }
       if (empty($_POST["email"])) {
-        $emailErr = "Email required";
+        $emailErr = "";
       } else {
         $email = test_input($_POST["email"]);
         //check format of an e-mail
@@ -79,7 +65,7 @@
         }
       }
       if (empty($_POST["nick"])) {
-        $nickErr = "Nick required";
+        $nickErr = "";
       } else {
         $nick = test_input($_POST["nick"]);
         //check if nick starst with an letter
@@ -88,14 +74,69 @@
         }
       }
     }
+    //database connection
+    $link = new mysqli("localhost", "root", "");
+    if (!$link) {
+      die("Not connected : " . mysql_error());
+    }
+    // make login the current db
+    // check whenever the database exists
+    $sql = "USE login";
+    if ($link->connect_error) {
+      die("Connection failed: " . $link->connect_error);
+    }
+    if ($link->query($sql) === true) {
+      echo "Connected to database <br>";
+    } else {
+      //error
+      echo "Error connecting to database:" . $link->error . "<br>";
+      $sql = "CREATE DATABASE login";
+      //create database if does not exist
+      if ($link->query($sql) === true) {
+        echo "Database created successfully<br>";
+      } else {
+        die("Error creating database: " . $link->error . "<br>");
+      }
+    }
+
+    // create users table
+    $sql = "CREATE TABLE users (
+        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(30) NOT NULL UNIQUE,
+        pwd VARCHAR(30) NOT NULL,
+        email VARCHAR(50) UNIQUE,
+        nick VARCHAR(50)
+        )";
+    if ($link->query($sql) === true) {
+      echo "Table created successfully<br>";
+    } else {
+      echo "Error creating table: " . $link->error . "<br>";
+    }
+    //check if user is already in database
+    console_log($login);
+    console_log($password);
+    console_log(md5($password));
+    $sql = "SELECT * FROM users WHERE username='$login'";
+    if ($link->query($sql) === true) {
+      echo "User found <br>";
+      $sql = "SELECT * FROM users WHERE username='$login' AND pwd='md5($password)'";
+      if ($link->query($sql) === true) {
+        echo "User logged in";
+      } else {
+        die("Error logging in: " . $link->error . "<br>");
+      }
+    } else {
+      echo "Account not found";
+    }
+    $link->close();
     ?>
     <form action="<?php echo htmlspecialchars(
       $_SERVER["PHP_SELF"]
     ); ?>" method="post">
     Login: <input type="text" name="login" id="login" value="<?php echo $login; ?>"><span class="error">*<?php echo $loginErr; ?></span><br><br>
-    Hasło: <input type="password" name="password" id="pwd"><span class="error">*<?php echo $passwordErr; ?></span><br><br>
-    Email: <input type="text" name="email" id="email" value="<?php echo $email; ?>"><span class="error">*<?php echo $emailErr; ?></span><br><br>
-    Nick: <input type="text" name="nick" id="nick" value="<?php echo $nick; ?>"><span class="error">*<?php echo $nickErr; ?></span><br><br>
+    Hasło: <input type="password" name="password" id="pwd" value="<?php echo $password; ?>"><span class="error">*<?php echo $passwordErr; ?></span><br><br>
+    Email: <input type="text" name="email" id="email" value="<?php echo $email; ?>"><span class="error"><?php echo $emailErr; ?></span><br><br>
+    Nick: <input type="text" name="nick" id="nick" value="<?php echo $nick; ?>"><span class="error"><?php echo $nickErr; ?></span><br><br>
     <input type="submit" value="Zaloguj/Zarejestruj">
     </form>
     

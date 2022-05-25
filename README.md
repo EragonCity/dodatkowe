@@ -10,10 +10,10 @@ Zadanie do zrobienia na poprawę:
 - [x]    	- Emali z godny ze standardem
 - [x]    	- Nick zaczyna się od litery
 - [x]    	- Informacje o błędnych danych wypisywane na formularzu (innerHTML)
-- [ ]    **Połączenie do bazy mysql:**
+- [x]    **Połączenie do bazy mysql:**
 - [ ]    	- odczyt z bazy zgodności loginu i hasła z wprowadzonym przez użytkownika
 - [ ]    	- zapis danych nowego użytkownika do bazy
-- [ ]    	- Połączenia do bazy - zdefiniować
+- [x]    	- Połączenia do bazy - zdefiniować
 - [ ]    	- Utworzyć tabelę użytkowników
 - [ ]    	- Nie pozwolić na dodanie nowego użytkownika o loginie lub nick-u istniejącym już w bazie
 - [ ]    **Hasła w bazie szygrowane MD5**

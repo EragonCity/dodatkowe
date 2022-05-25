@@ -17,6 +17,29 @@
       $data = htmlspecialchars($data);
       return $data;
     }
+    //database connection
+    $link = new mysqli("localhost", "root", "");
+    if (!$link) {
+      die("Not connected : " . mysql_error());
+    }
+
+    // make login the current db
+    // check whenever the database exists
+    $database_select = "USE login";
+    $database_create = "CREATE DATABASE login";
+    if ($link->query($database_select) === true) {
+      echo "Connected to database";
+    } else {
+      //error
+      echo "Error connecting to database:" . $link->error;
+      //create database if does not exist
+      if ($link->query($database_create) === true) {
+        echo "Database created successfully";
+      } else {
+        echo "Error created database: " . $link->error;
+      }
+    }
+    $link->close();
     //form validation
     $loginErr = $passwordErr = $emailErr = $nickErr = "";
     $login = $password = $email = $nick = "";

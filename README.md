@@ -11,7 +11,7 @@ Zadanie do zrobienia na poprawę:
 - [x]    	- Nick zaczyna się od litery
 - [x]    	- Informacje o błędnych danych wypisywane na formularzu (innerHTML)
 - [x]    **Połączenie do bazy mysql:**
-- [?]    	- odczyt z bazy zgodności loginu i hasła z wprowadzonym przez użytkownika
+- [x]    	- odczyt z bazy zgodności loginu i hasła z wprowadzonym przez użytkownika
 - [ ]    	- zapis danych nowego użytkownika do bazy
 - [x]    	- Połączenia do bazy - zdefiniować
 - [x]    	- Utworzyć tabelę użytkowników

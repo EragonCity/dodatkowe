@@ -16,7 +16,7 @@ Zadanie do zrobienia na poprawę:
 - [x]    	- Połączenia do bazy - zdefiniować
 - [x]    	- Utworzyć tabelę użytkowników
 - [ ]    	- Nie pozwolić na dodanie nowego użytkownika o loginie lub nick-u istniejącym już w bazie
-- [ ]    **Hasła w bazie szygrowane MD5**
-- [ ]    **Aplikacja daje możliwośc zalogowania się, a jeśli nie ma w bazie jeszcze takiego użytkownika to można go dodać do bazy**
+- [x]    **Hasła w bazie szygrowane MD5**
+- [x]    **Aplikacja daje możliwośc zalogowania się, a jeśli nie ma w bazie jeszcze takiego użytkownika to można go dodać do bazy**
 
 ==Do oddania do 31 maja 2022==

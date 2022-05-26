@@ -12,10 +12,10 @@ Zadanie do zrobienia na poprawę:
 - [x]    	- Informacje o błędnych danych wypisywane na formularzu (innerHTML)
 - [x]    **Połączenie do bazy mysql:**
 - [x]    	- odczyt z bazy zgodności loginu i hasła z wprowadzonym przez użytkownika
-- [ ]    	- zapis danych nowego użytkownika do bazy
+- [x]    	- zapis danych nowego użytkownika do bazy
 - [x]    	- Połączenia do bazy - zdefiniować
 - [x]    	- Utworzyć tabelę użytkowników
-- [ ]    	- Nie pozwolić na dodanie nowego użytkownika o loginie lub nick-u istniejącym już w bazie
+- [x]    	- Nie pozwolić na dodanie nowego użytkownika o loginie lub nick-u istniejącym już w bazie
 - [x]    **Hasła w bazie szygrowane MD5**
 - [x]    **Aplikacja daje możliwośc zalogowania się, a jeśli nie ma w bazie jeszcze takiego użytkownika to można go dodać do bazy**
 

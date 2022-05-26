@@ -65,8 +65,7 @@
     $loginErr = $passwordErr = $emailErr = $nickErr = "";
     $login = $password = $email = $nick = "";
     //check if form request method is post
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
+    if ($_SERVER["REQUEST_METHOD"] = "POST") {
       //check whethever fields are empty
       if (empty($_POST["login"])) {
         $loginErr = "Login required";
@@ -109,7 +108,8 @@
           $nickErr = "Nick should start with letter";
         }
       }
-      ?>
+    }
+    ?>
     <form action="<?php echo htmlspecialchars(
       $_SERVER["PHP_SELF"]
     ); ?>" method="post">
@@ -122,7 +122,7 @@
     //database connection
     $link = new mysqli("localhost", "root", "");
     if (!$link) {
-      die("Not connected : " . mysql_error());
+      die("Not connected : " . mysqli_error($link));
     }
     // make login the current db
     // check whenever the database exists
@@ -194,12 +194,19 @@
       echo "Account not found <br>";
       echo "Do you want to create a new account?  ";
       echo '<input type="submit" name="register" value="Rejestruj">';
+      if (($_SERVER["REQUEST_METHOD"] = "POST") and isset($_POST["register"])) {
+        $sql = "INSERT INTO users VALUES (NULL, '$login', MD5('$password'), '$email', '$nick')";
+        if (!$link->query($sql)) {
+          if ($link->error === "Duplicate entry '$login' for key 'username'") {
+            echo "<br>User already exists in the database";
+          } else {
+            echo "<br>Error description: " . $link->error;
+          }
+        }
+      }
     }
     $link->close();
-
-    }
     ?>
     </form>
-    
 </body>
 </html>

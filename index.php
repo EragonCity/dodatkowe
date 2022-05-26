@@ -117,7 +117,7 @@
     Hasło: <input type="password" name="password" id="pwd" value="<?php echo $password; ?>"><span class="error">*<?php echo $passwordErr; ?></span><br><br>
     Email: <input type="text" name="email" id="email" value="<?php echo $email; ?>"><span class="error"><?php echo $emailErr; ?></span><br><br>
     Nick: <input type="text" name="nick" id="nick" value="<?php echo $nick; ?>"><span class="error"><?php echo $nickErr; ?></span><br><br>
-    <input type="submit" name="loguj" value="Zaloguj"><br>
+    <input type="submit" name="loguj" value="Zaloguj"><br><span style="color:blue">
     <?php
     //database connection
     $link = new mysqli("localhost", "root", "");
@@ -188,13 +188,16 @@
       if ($result->num_rows > 0) {
         echo "User logged in";
       } else {
-        echo "Error logging in: " . $link->error . "<br>";
+        echo "Password is not right<br>";
       }
     } else {
       echo "Account not found <br>";
       echo "Do you want to create a new account?  ";
       echo '<input type="submit" name="register" value="Rejestruj">';
       if (($_SERVER["REQUEST_METHOD"] = "POST") and isset($_POST["register"])) {
+        if (empty($password) or empty($password)) {
+          die("<br> Password and login should not be blank <br>");
+        }
         $sql = "INSERT INTO users VALUES (NULL, '$login', MD5('$password'), '$email', '$nick')";
         if (!$link->query($sql)) {
           if ($link->error === "Duplicate entry '$login' for key 'username'") {
@@ -206,7 +209,7 @@
       }
     }
     $link->close();
-    ?>
+    ?></span>
     </form>
 </body>
 </html>

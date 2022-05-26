@@ -44,7 +44,7 @@
         myExceptionHandler($e);
       }
     });
-    //stripping unecessary data, removing backslashes, changing html special haracters to text
+    //stripping unecessary data, removing backslashes, changing html special characters to text
     function test_input($data)
     {
       $data = trim($data);
@@ -90,6 +90,7 @@
             "Password should be at least 7 characters long and should have at least one uppercase, one lowercase letter and one number";
         }
       }
+      //email validation
       if (empty($_POST["email"])) {
         $emailErr = "";
       } else {
@@ -99,6 +100,7 @@
           $emailErr = "Invalid email";
         }
       }
+      //nick validation
       if (empty($_POST["nick"])) {
         $nickErr = "";
       } else {
@@ -110,6 +112,7 @@
       }
     }
     ?>
+    <!--form-->
     <form action="<?php echo htmlspecialchars(
       $_SERVER["PHP_SELF"]
     ); ?>" method="post">
@@ -126,23 +129,26 @@
     }
     // make login the current db
     // check whenever the database exists
-    $sql = "USE login";
     if ($link->connect_error) {
       die("Connection failed: " . $link->connect_error);
     }
+    $sql = "CREATE DATABASE IF NOT EXISTS login";
     if ($link->query($sql) === true) {
-      echo "Connected to database <br>";
-    } else {
+      echo "Database exists/was created <br>";
+      $sql = "USE login";
+      $link->query($sql);
+      echo "Connected to database" . $link->error . "<br>";
+    } /*else {
       //error
       echo "Error connecting to database:" . $link->error . "<br>";
-      $sql = "CREATE DATABASE login";
+      $sql = "CREATE DATABASE IF NOT EXIST login";
       //create database if does not exist
       if ($link->query($sql) === true) {
         echo "Database created successfully<br>";
       } else {
         die("Error creating database: " . $link->error . "<br>");
       }
-    }
+    }*/
 
     // create users table
     $sql = "CREATE TABLE users (
@@ -180,8 +186,10 @@
     } else {
       echo "0 results";
     }*/
+    //check if account exists
     if ($result->num_rows > 0) {
       echo "User found <br>";
+      //user log in
       $sql = "SELECT * FROM users WHERE username='$login' AND pwd=MD5('$password');";
       //!console_log($sql);
       $result = $link->query($sql);
@@ -194,10 +202,13 @@
       echo "Account not found <br>";
       echo "Do you want to create a new account?  ";
       echo '<input type="submit" name="register" value="Rejestruj">';
+      //check if submit with register button was pushed
       if (($_SERVER["REQUEST_METHOD"] = "POST") and isset($_POST["register"])) {
-        if (empty($password) or empty($password)) {
+        //deny registering if password or login empty
+        if (empty($password) or empty($login)) {
           die("<br> Password and login should not be blank <br>");
         }
+        //user registration
         $sql = "INSERT INTO users VALUES (NULL, '$login', MD5('$password'), '$email', '$nick')";
         if (!$link->query($sql)) {
           if ($link->error === "Duplicate entry '$login' for key 'username'") {

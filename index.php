@@ -155,8 +155,8 @@
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         username VARCHAR(30) NOT NULL UNIQUE,
         pwd VARCHAR(32) NOT NULL,
-        email VARCHAR(50) UNIQUE,
-        nick VARCHAR(50)
+        email VARCHAR(50),
+        nick VARCHAR(50) UNIQUE
         )";
     if ($link->query($sql) === true) {
       echo "Table created successfully<br>";

@@ -1,5 +1,6 @@
 # **As of now works only with php 8.0.13 as far as i know**
 Propably because of how i forced database to use table that doen't exist
+
 Zadanie do zrobienia na poprawę:
 
 - [x]    **Strona do logowania:** 
